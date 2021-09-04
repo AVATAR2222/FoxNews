@@ -1,14 +1,10 @@
 package ir.news.fragment;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,10 +12,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.CubeGrid;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.news.NewsAdapter;
+import ir.news.adapter.NewsAdapter;
 import ir.news.R;
 import ir.news.core.ApiClient;
 import ir.news.core.News;
@@ -36,17 +35,23 @@ public class HomeFragment extends Fragment
     private NewsAdapter newsAdapter;
     public static ApiInterface apiInterface;
 
+
     @Nullable
     @Override
     public View onCreateView( @NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState )
     {
         View v = inflater.inflate( R.layout.fragment_home, container, false );
 
+        ProgressBar progressBar = v.findViewById(R.id.spin_kit);
+        Sprite doubleBounce = new CubeGrid();
+        progressBar.setIndeterminateDrawable(doubleBounce);
+
         recyclerView = v.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+
 
         newsModelList = new ArrayList<>();
 
@@ -59,6 +64,7 @@ public class HomeFragment extends Fragment
                 newsAdapter = new NewsAdapter(newsModelList, getContext());
                 recyclerView.setAdapter(newsAdapter);
                 newsAdapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.INVISIBLE);
             }
 
             @Override

@@ -1,6 +1,7 @@
 package ir.news.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -26,7 +27,7 @@ public class BottomNavigationActivity extends AppCompatActivity
         setContentView( R.layout.activity_bottom_navigation );
         findview();
 
-        Fragment selectedFragment = new BookmarkFragment();
+        Fragment selectedFragment = new HomeFragment();
 
         getSupportFragmentManager().beginTransaction().replace( R.id.fragment_container, selectedFragment ).commit();
 
@@ -42,8 +43,16 @@ public class BottomNavigationActivity extends AppCompatActivity
                     case R.id.homeFragment:
                         selectedFragment = new HomeFragment();
                         break;
+
                     case R.id.bookmarkFragment:
+
                         selectedFragment = new BookmarkFragment();
+                        break;
+
+                    default:
+
+                        selectedFragment = new HomeFragment();
+
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace( R.id.fragment_container, selectedFragment ).commit();

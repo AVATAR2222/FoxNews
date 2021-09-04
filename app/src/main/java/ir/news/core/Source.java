@@ -1,6 +1,8 @@
 package ir.news.core;
 
-public class Source {
+import java.io.Serializable;
+
+public class Source implements Serializable {
 
     public String name,id;
 

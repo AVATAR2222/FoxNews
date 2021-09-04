@@ -3,10 +3,7 @@ package ir.news.core;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-
-import ir.news.model.NewsModel;
 
 public class News implements Serializable {
 
@@ -14,23 +11,9 @@ public class News implements Serializable {
 
    public Source source;
 
-//public String title ,description,urlToImage,content,publishedAt;
-//
-//    public String getTitle() {
-//        return title;
-//    }
-//
-//    public String getDescription() {
-//        return description;
-//    }
-//
-//    public String getContent() {
-//        return content;
-//    }
-//
-//    public String getPublishedAt() {
-//        return publishedAt;
-//    }
+public String title ,description,urlToImage,content,publishedAt;
+
+
 
     @SerializedName("articles")
     private List<News> AllNews;
